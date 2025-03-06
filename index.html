@@ -432,21 +432,34 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        
+
          function updateCountryCode() {
             const select = document.getElementById("countryCode");
             const isMobile = window.innerWidth <= 768;
 
-            for (let option of select.options) {
-                let fullText = option.getAttribute("data-fulltext");
-                let countryCode = option.value;
-
-                if (!fullText) {
-                    option.setAttribute("data-fulltext", option.textContent);
+            if (!isMobile) {
+                for (let option of select.options) {
+                    option.textContent = option.getAttribute("data-fulltext");
                 }
-
-                option.textContent = isMobile ? countryCode : option.getAttribute("data-fulltext");
+                return;
             }
+
+            // Se for mobile, mostrar apenas os códigos
+            select.addEventListener("change", () => {
+                const selectedOption = select.options[select.selectedIndex];
+                select.selectedOptions[0].textContent = selectedOption.value;
+            });
+
+            select.addEventListener("focus", () => {
+                for (let option of select.options) {
+                    option.textContent = option.getAttribute("data-fulltext");
+                }
+            });
+
+            select.addEventListener("blur", () => {
+                const selectedOption = select.options[select.selectedIndex];
+                select.selectedOptions[0].textContent = selectedOption.value;
+            });
         }
 
         document.addEventListener("DOMContentLoaded", updateCountryCode);
