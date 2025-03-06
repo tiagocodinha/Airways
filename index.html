@@ -117,15 +117,42 @@
             background-color: #cc0000;
         }
 
-        .video-section {
-            padding: 5rem 2rem;
+        .footer {
             background-color: var(--dark);
             color: var(--light);
+            padding: 3rem 0;
+            margin-top: auto;
         }
 
-        video {
-            width: 100%;
-            border-radius: 10px;
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .social-links a {
+            color: var(--light);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a img {
+    width: 40px; /* Define o mesmo tamanho para todos os ícones */
+    height: 40px;
+    object-fit: contain; /* Mantém a proporção sem cortar */
+    transition: transform 0.3s ease;
+}
+
+        .social-links a:hover {
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            font-size: 0.9rem;
+            opacity: 0.8;
         }
 
         @keyframes fadeIn {
@@ -443,22 +470,28 @@
         </div>
     </section>
 
-    <section class="video-section">
-        <div class="container">
-            <div class="video-container">
-                <div class="youtube-wrapper">
-                    <iframe 
-                        width="100%" height="500"
-                        src="https://www.youtube.com/embed/dq6N3I6k5Zo?autoplay=0&rel=0&modestbranding=1&playsinline=1" 
-                        title="Airways Aviation Video" 
-                        frameborder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                        allowfullscreen
-                        loading="lazy">
-                    </iframe>
+    <section class="footer">
+        <footer class="footer">
+            <div class="container">
+                <div class="social-links">
+                    <a href="https://www.facebook.com/AirwaysAviationAcademy?locale=pt_BR" target="_blank" aria-label="Facebook">
+                        <img src="images/facebook.png" alt="Facebook">
+                    </a>
+                    <a href="https://www.instagram.com/airwaysaviation.pt/" target="_blank" aria-label="Instagram">
+                        <img src="images/instagram.png" alt="Instagram">
+                    </a>
+                    <a href="" target="_blank" aria-label="Tiktok">
+                        <img src="images/tiktok.png" alt="Tiktok">
+                    </a>
+                    <a href="" target="_blank" aria-label="YouTube">
+                        <img src="images/youtube.png" alt="YouTube">
+                    </a>
+                </div>
+                <div class="copyright">
+                    © 2025 Airways Aviation Academy. All rights reserved.
                 </div>
             </div>
-        </div>
+        </footer>
     </section>
     
     <!-- Botão do WhatsApp -->
