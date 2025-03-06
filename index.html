@@ -169,6 +169,17 @@
                 max-height: 40px;
             }
         }
+
+        @media (max-width: 768px) {
+    #countryCode option {
+        font-size: 0; /* Oculta o texto */
+    }
+
+    #countryCode option:before {
+        content: attr(value); /* Exibe apenas o código */
+        font-size: 16px; /* Tamanho normal para o código */
+    }
+}
     </style>
 </head>
 <body>
