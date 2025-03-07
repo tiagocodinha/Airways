@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: https://www.infoairways.com/sitemap.xml
