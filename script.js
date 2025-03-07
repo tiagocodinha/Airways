@@ -70,41 +70,41 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Função para validar e corrigir número de telefone
     function validatePhoneNumber() {
-        var fullPhoneNumber = iti.getNumber(); // Obtém número formatado corretamente
+        var fullPhoneNumber = iti.getNumber().trim(); // Obtém número formatado corretamente
         var isValid = iti.isValidNumber();
 
         if (!isValid || fullPhoneNumber === "" || fullPhoneNumber.includes("undefined")) {
             phoneError.style.display = "block";
             phoneInput.classList.add("is-invalid");
             phoneInput.setCustomValidity("Número inválido");
+            return false;
         } else {
             phoneError.style.display = "none";
             phoneInput.classList.remove("is-invalid");
             phoneInput.setCustomValidity("");
+            return fullPhoneNumber;
         }
-
-        return fullPhoneNumber;
     }
 
     // Adiciona eventos para validar o telefone em tempo real
     phoneInput.addEventListener("input", validatePhoneNumber);
     phoneInput.addEventListener("blur", validatePhoneNumber);
 
-    // Modifica o número antes do envio
+    // Modifica o número antes do envio e garante um único evento submit
     form.addEventListener("submit", function (event) {
-        var fullPhoneNumber = validatePhoneNumber(); // Garante validação antes de enviar
+        event.preventDefault(); // Impede o envio automático
 
-        if (!form.checkValidity() || fullPhoneNumber.includes("undefined")) {
-            event.preventDefault(); // Bloqueia envio se houver erro
+        var fullPhoneNumber = validatePhoneNumber(); // Garante validação antes de enviar
+        if (!fullPhoneNumber) return; // Se inválido, bloqueia envio
+
+        if (!form.checkValidity()) {
             form.reportValidity();
             return;
         }
 
-        phoneInput.value = fullPhoneNumber; // Garante que o valor enviado é correto
+        phoneInput.value = fullPhoneNumber; // Atualiza input com número formatado corretamente
 
-        console.log("Número enviado:", fullPhoneNumber); // Debug
-
-        event.preventDefault(); // Bloqueia envio padrão
+        console.log("Número enviado:", fullPhoneNumber); // Debug no console
 
         const formData = new FormData(form);
 
@@ -127,6 +127,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+
 
 
 
