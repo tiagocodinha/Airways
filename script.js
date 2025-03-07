@@ -1,23 +1,3 @@
-function updateCountryCode() {
-    const select = document.getElementById("countryCode");
-    const isMobile = window.innerWidth <= 768;
-
-    for (let option of select.options) {
-        let fullText = option.getAttribute("data-fulltext");
-        let countryCode = option.value;
-
-        if (!fullText) {
-            option.setAttribute("data-fulltext", option.textContent);
-        }
-
-        option.textContent = isMobile ? countryCode : option.getAttribute("data-fulltext");
-    }
-}
-
-document.addEventListener("DOMContentLoaded", updateCountryCode);
-window.addEventListener("resize", updateCountryCode);
-
-
 // Header scroll effect with throttling
 let lastScrollPosition = window.scrollY;
 let ticking = false;
@@ -70,24 +50,88 @@ form.classList.add("was-validated"); // Para exibir erros corretamente com Boots
 });
 
 
-function validatePhoneNumber() {
-const phoneInput = document.getElementById("phone");
-const countrySelect = document.getElementById("countryCode");
-const phoneError = document.getElementById("phoneError");
 
 
 
-// Remove espaços e caracteres não numéricos
-const phoneNumber = phoneInput.value.replace(/\D/g, "");
 
-if (phoneNumber.length === phoneLength) {
-phoneError.style.display = "none";
-phoneInput.setCustomValidity("");
-} else {
-phoneError.style.display = "block";
-phoneInput.setCustomValidity("Número inválido");
-}
-}
+
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("leadForm");
+    const phoneInput = document.getElementById("phone");
+    const phoneError = document.getElementById("phoneError");
+
+    // Configuração do intl-tel-input
+    var iti = window.intlTelInput(phoneInput, {
+        initialCountry: "pt",
+        preferredCountries: ["pt", "br", "es", "fr"],
+        separateDialCode: true,
+        utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"
+    });
+
+    // Função para validar e corrigir número de telefone
+    function validatePhoneNumber() {
+        var fullPhoneNumber = iti.getNumber(); // Obtém número formatado corretamente
+        var isValid = iti.isValidNumber();
+
+        if (!isValid || fullPhoneNumber === "" || fullPhoneNumber.includes("undefined")) {
+            phoneError.style.display = "block";
+            phoneInput.classList.add("is-invalid");
+            phoneInput.setCustomValidity("Número inválido");
+        } else {
+            phoneError.style.display = "none";
+            phoneInput.classList.remove("is-invalid");
+            phoneInput.setCustomValidity("");
+        }
+
+        return fullPhoneNumber;
+    }
+
+    // Adiciona eventos para validar o telefone em tempo real
+    phoneInput.addEventListener("input", validatePhoneNumber);
+    phoneInput.addEventListener("blur", validatePhoneNumber);
+
+    // Modifica o número antes do envio
+    form.addEventListener("submit", function (event) {
+        var fullPhoneNumber = validatePhoneNumber(); // Garante validação antes de enviar
+
+        if (!form.checkValidity() || fullPhoneNumber.includes("undefined")) {
+            event.preventDefault(); // Bloqueia envio se houver erro
+            form.reportValidity();
+            return;
+        }
+
+        phoneInput.value = fullPhoneNumber; // Garante que o valor enviado é correto
+
+        console.log("Número enviado:", fullPhoneNumber); // Debug
+
+        event.preventDefault(); // Bloqueia envio padrão
+
+        const formData = new FormData(form);
+
+        fetch(form.action, {
+            method: form.method,
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("Resposta do servidor:", data);
+            if (data.status === "success") {
+                window.location.href = "sucesso.html";
+            } else {
+                alert("Erro ao enviar o formulário. Tente novamente.");
+            }
+        })
+        .catch(error => {
+            console.error("Erro ao enviar o formulário:", error);
+            alert("Ocorreu um erro ao enviar o formulário. Tente novamente.");
+        });
+    });
+});
+
+
+
+
+
 
 
 document.addEventListener("DOMContentLoaded", function () {
