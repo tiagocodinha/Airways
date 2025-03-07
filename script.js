@@ -60,7 +60,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const phoneInput = document.getElementById("phone");
     const phoneError = document.getElementById("phoneError");
 
-    // Configuração do intl-tel-input
     var iti = window.intlTelInput(phoneInput, {
         initialCountry: "pt",
         preferredCountries: ["pt", "br", "es", "fr"],
@@ -68,12 +67,11 @@ document.addEventListener("DOMContentLoaded", function () {
         utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"
     });
 
-    // Função para validar e corrigir número de telefone
     function validatePhoneNumber() {
-        var fullPhoneNumber = iti.getNumber().trim(); // Obtém número formatado corretamente
+        var fullPhoneNumber = iti.getNumber();
         var isValid = iti.isValidNumber();
 
-        if (!isValid || fullPhoneNumber === "" || fullPhoneNumber.includes("undefined")) {
+        if (!isValid || fullPhoneNumber.includes("undefined")) {
             phoneError.style.display = "block";
             phoneInput.classList.add("is-invalid");
             phoneInput.setCustomValidity("Número inválido");
@@ -86,25 +84,21 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // Adiciona eventos para validar o telefone em tempo real
     phoneInput.addEventListener("input", validatePhoneNumber);
     phoneInput.addEventListener("blur", validatePhoneNumber);
 
-    // Modifica o número antes do envio e garante um único evento submit
     form.addEventListener("submit", function (event) {
-        event.preventDefault(); // Impede o envio automático
+        event.preventDefault();
 
-        var fullPhoneNumber = validatePhoneNumber(); // Garante validação antes de enviar
-        if (!fullPhoneNumber) return; // Se inválido, bloqueia envio
+        var fullPhoneNumber = validatePhoneNumber();
+        if (!fullPhoneNumber) return;
 
         if (!form.checkValidity()) {
             form.reportValidity();
             return;
         }
 
-        phoneInput.value = fullPhoneNumber; // Atualiza input com número formatado corretamente
-
-        console.log("Número enviado:", fullPhoneNumber); // Debug no console
+        phoneInput.value = fullPhoneNumber;
 
         const formData = new FormData(form);
 
@@ -114,7 +108,6 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .then(response => response.json())
         .then(data => {
-            console.log("Resposta do servidor:", data);
             if (data.status === "success") {
                 window.location.href = "sucesso.html";
             } else {
@@ -127,6 +120,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+
 
 
 
