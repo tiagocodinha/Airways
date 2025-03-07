@@ -59,7 +59,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById("leadForm");
     const phoneInput = document.getElementById("phone");
     const phoneError = document.getElementById("phoneError");
+    const submitBtn = form.querySelector("button[type='submit']");
 
+    // Configuração do intl-tel-input
     var iti = window.intlTelInput(phoneInput, {
         initialCountry: "pt",
         preferredCountries: ["pt", "br", "es", "fr"],
@@ -67,6 +69,7 @@ document.addEventListener("DOMContentLoaded", function () {
         utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"
     });
 
+    // Função para validar o número de telefone
     function validatePhoneNumber() {
         var fullPhoneNumber = iti.getNumber();
         var isValid = iti.isValidNumber();
@@ -84,21 +87,31 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    // Validação em tempo real
     phoneInput.addEventListener("input", validatePhoneNumber);
     phoneInput.addEventListener("blur", validatePhoneNumber);
 
-    form.addEventListener("submit", function (event) {
-        event.preventDefault();
+    // Remove qualquer listener de submit duplicado antes de adicionar um novo
+    form.removeEventListener("submit", handleSubmit);
+    form.addEventListener("submit", handleSubmit);
+
+    function handleSubmit(event) {
+        event.preventDefault(); // Impede envio padrão
 
         var fullPhoneNumber = validatePhoneNumber();
-        if (!fullPhoneNumber) return;
+        if (!fullPhoneNumber) return; // Bloqueia envio se telefone for inválido
 
         if (!form.checkValidity()) {
             form.reportValidity();
             return;
         }
 
+        // Atualiza o valor do campo telefone com o número formatado
         phoneInput.value = fullPhoneNumber;
+
+        // Evita envios duplicados desativando o botão temporariamente
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Enviando...";
 
         const formData = new FormData(form);
 
@@ -117,9 +130,14 @@ document.addEventListener("DOMContentLoaded", function () {
         .catch(error => {
             console.error("Erro ao enviar o formulário:", error);
             alert("Ocorreu um erro ao enviar o formulário. Tente novamente.");
+        })
+        .finally(() => {
+            submitBtn.disabled = false; // Reativa o botão após a resposta do servidor
+            submitBtn.textContent = "I Want To Be A Pilot";
         });
-    });
+    }
 });
+
 
 
 
