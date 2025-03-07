@@ -34,22 +34,6 @@ document.querySelectorAll('.form-container, .video-container').forEach(el => {
     observer.observe(el);
 });
 
-document.addEventListener("DOMContentLoaded", function () {
-const form = document.getElementById("leadForm");
-
-form.addEventListener("submit", function (event) {
-if (!form.checkValidity()) {
-    event.preventDefault(); // Bloqueia o envio
-    event.stopPropagation();
-    form.reportValidity(); // Exibe mensagens nativas de erro do navegador
-    return;
-}
-
-form.classList.add("was-validated"); // Para exibir erros corretamente com Bootstrap
-});
-});
-
-
 
 
 
@@ -60,6 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const phoneInput = document.getElementById("phone");
     const phoneError = document.getElementById("phoneError");
     const submitBtn = form.querySelector("button[type='submit']");
+    let isSubmitting = false; // 🔴 Flag para evitar envios duplicados
 
     // Configuração do intl-tel-input
     var iti = window.intlTelInput(phoneInput, {
@@ -69,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
         utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"
     });
 
-    // Função para validar o número de telefone
+    // Função para validar e corrigir número de telefone
     function validatePhoneNumber() {
         var fullPhoneNumber = iti.getNumber();
         var isValid = iti.isValidNumber();
@@ -87,27 +72,40 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // Validação em tempo real
+    // Adiciona eventos para validar o telefone em tempo real
     phoneInput.addEventListener("input", validatePhoneNumber);
     phoneInput.addEventListener("blur", validatePhoneNumber);
 
-    // Remove qualquer listener de submit duplicado antes de adicionar um novo
+    // 🔴 Remover qualquer evento duplicado antes de adicionar um novo
     form.removeEventListener("submit", handleSubmit);
     form.addEventListener("submit", handleSubmit);
 
     function handleSubmit(event) {
         event.preventDefault(); // Impede envio padrão
 
-        var fullPhoneNumber = validatePhoneNumber();
-        if (!fullPhoneNumber) return; // Bloqueia envio se telefone for inválido
+        // 🔴 Evita envios duplicados
+        if (isSubmitting) {
+            console.log("Envio bloqueado para evitar duplicação.");
+            return;
+        }
+        isSubmitting = true; // 🔴 Define a flag para evitar envios duplicados
 
-        if (!form.checkValidity()) {
-            form.reportValidity();
+        var fullPhoneNumber = validatePhoneNumber();
+        if (!fullPhoneNumber) {
+            isSubmitting = false; // 🔴 Libera para novo envio se o número for inválido
             return;
         }
 
-        // Atualiza o valor do campo telefone com o número formatado
+        if (!form.checkValidity()) {
+            form.reportValidity();
+            isSubmitting = false; // 🔴 Libera para novo envio se houver erro no formulário
+            return;
+        }
+
+        // Atualiza o valor do campo telefone com o número formatado corretamente
         phoneInput.value = fullPhoneNumber;
+
+        console.log("Número enviado:", fullPhoneNumber); // Debug
 
         // Evita envios duplicados desativando o botão temporariamente
         submitBtn.disabled = true;
@@ -132,11 +130,13 @@ document.addEventListener("DOMContentLoaded", function () {
             alert("Ocorreu um erro ao enviar o formulário. Tente novamente.");
         })
         .finally(() => {
+            isSubmitting = false; // 🔴 Libera para novo envio após resposta do servidor
             submitBtn.disabled = false; // Reativa o botão após a resposta do servidor
             submitBtn.textContent = "I Want To Be A Pilot";
         });
     }
 });
+
 
 
 
