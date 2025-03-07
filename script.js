@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const phoneInput = document.getElementById("phone");
     const phoneError = document.getElementById("phoneError");
     const submitBtn = form.querySelector("button[type='submit']");
-    let isSubmitting = false; // 🔴 Flag para evitar envios duplicados
+    let isSubmitting = false; // 🔴 Flag para impedir envios duplicados
 
     // Configuração do intl-tel-input
     var iti = window.intlTelInput(phoneInput, {
@@ -72,15 +72,8 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // Adiciona eventos para validar o telefone em tempo real
-    phoneInput.addEventListener("input", validatePhoneNumber);
-    phoneInput.addEventListener("blur", validatePhoneNumber);
-
     // 🔴 Remover qualquer evento duplicado antes de adicionar um novo
-    form.removeEventListener("submit", handleSubmit);
-    form.addEventListener("submit", handleSubmit);
-
-    function handleSubmit(event) {
+    form.addEventListener("submit", function (event) {
         event.preventDefault(); // Impede envio padrão
 
         // 🔴 Evita envios duplicados
@@ -134,5 +127,6 @@ document.addEventListener("DOMContentLoaded", function () {
             submitBtn.disabled = false; // Reativa o botão após a resposta do servidor
             submitBtn.textContent = "I Want To Be A Pilot";
         });
-    }
+    }, { once: true }); // 🔴 O evento `submit` agora só pode ser registrado UMA VEZ
 });
+
