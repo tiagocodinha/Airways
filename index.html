@@ -120,8 +120,10 @@
         }
 
         .submit-btn:hover {
-            background-color: #cc0000;
-        }
+        background-color: #cc0000;
+        color: var(--light); /* Garante que o texto permaneça branco */
+        font-weight: bold; /* Adiciona negrito ao texto */
+    }
 
         .footer {
             background-color: var(--dark);
@@ -144,8 +146,8 @@
         }
 
         .social-links a img {
-    width: 40px; /* Define o mesmo tamanho para todos os ícones */
-    height: 40px;
+    width: 30px; /* Define o mesmo tamanho para todos os ícones */
+    height: 30px;
     object-fit: contain; /* Mantém a proporção sem cortar */
     transition: transform 0.3s ease;
 }
