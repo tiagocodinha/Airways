@@ -130,3 +130,38 @@ document.addEventListener("DOMContentLoaded", function () {
     }, { once: true }); // 🔴 O evento `submit` agora só pode ser registrado UMA VEZ
 });
 
+
+
+document.getElementById('leadForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Evita o envio imediato
+
+    grecaptcha.ready(function() {
+        grecaptcha.execute('6LdrdO8qAAAAAAmgcczCLR_rhm1a2_Z-zLUFAOvc', {action: 'submit'}).then(function(token) {
+            document.getElementById('recaptchaResponse').value = token;
+
+            // Agora envia os dados para o Cloudflare Worker
+            enviarDados();
+        });
+    });
+});
+
+function enviarDados() {
+    let form = document.getElementById('leadForm');
+    let formData = new FormData(form);
+
+    fetch("https://validar-recaptcha.geral-284.workers.dev/", { // Substitua pela URL do seu Worker
+        method: "POST",
+        body: JSON.stringify({ recaptcha_response: formData.get("recaptcha_response") }),
+        headers: { "Content-Type": "application/json" }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert("Verificação bem-sucedida! Enviando formulário...");
+            form.submit(); // Agora podemos enviar o formulário para o Google Sheets
+        } else {
+            alert("Erro na verificação do reCAPTCHA.");
+        }
+    })
+    .catch(error => console.error("Erro:", error));
+}
