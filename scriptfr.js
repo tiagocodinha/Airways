@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Configuração do intl-tel-input
     var iti = window.intlTelInput(phoneInput, {
-        initialCountry: "pt",
+        initialCountry: "fr",
         preferredCountries: ["fr", "pt", "es", "br"],
         separateDialCode: true,
         utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"
