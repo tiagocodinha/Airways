@@ -113,7 +113,7 @@ document.addEventListener("DOMContentLoaded", function () {
         .then(response => response.json())
         .then(data => {
             if (data.status === "success") {
-                window.location.href = "sucesso.html";
+                window.location.href = "/sucesso.html";
             } else {
                 alert("Erro ao enviar o formulário. Tente novamente.");
             }
