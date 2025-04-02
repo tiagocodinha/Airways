@@ -48,8 +48,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Configuração do intl-tel-input
     var iti = window.intlTelInput(phoneInput, {
-        initialCountry: "pt",
-        preferredCountries: ["pt", "br", "es", "fr"],
+        initialCountry: "fr",
+        preferredCountries: ["fr", "pt", "es", "br"],
         separateDialCode: true,
         utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"
     });
@@ -102,7 +102,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Evita envios duplicados desativando o botão temporariamente
         submitBtn.disabled = true;
-        submitBtn.textContent = "Enviando...";
+        submitBtn.textContent = "Sending...";
 
         const formData = new FormData(form);
 
@@ -113,19 +113,19 @@ document.addEventListener("DOMContentLoaded", function () {
         .then(response => response.json())
         .then(data => {
             if (data.status === "success") {
-                window.location.href = "/sucesso.html";
+                window.location.href = "/sucessoen.html";
             } else {
-                alert("Erro ao enviar o formulário. Tente novamente.");
+                alert("Error sending the form. Please try again.");
             }
         })
         .catch(error => {
             console.error("Erro ao enviar o formulário:", error);
-            alert("Ocorreu um erro ao enviar o formulário. Tente novamente.");
+            alert("There was an error sending the form. Please try again.");
         })
         .finally(() => {
             isSubmitting = false; // 🔴 Libera para novo envio após resposta do servidor
             submitBtn.disabled = false; // Reativa o botão após a resposta do servidor
-            submitBtn.textContent = "I Want To Be A Pilot";
+            submitBtn.textContent = "I want to be a pilot";
         });
     }, { once: true }); // 🔴 O evento `submit` agora só pode ser registrado UMA VEZ
 });
