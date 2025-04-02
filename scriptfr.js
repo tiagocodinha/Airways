@@ -102,7 +102,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Evita envios duplicados desativando o botão temporariamente
         submitBtn.disabled = true;
-        submitBtn.textContent = "Enviando...";
+        submitBtn.textContent = "Envoi...";
 
         const formData = new FormData(form);
 
@@ -113,19 +113,19 @@ document.addEventListener("DOMContentLoaded", function () {
         .then(response => response.json())
         .then(data => {
             if (data.status === "success") {
-                window.location.href = "/sucesso.html";
+                window.location.href = "/sucessofr.html";
             } else {
-                alert("Erro ao enviar o formulário. Tente novamente.");
+                alert("Erreur d'envoi du formulaire. Veuillez réessayer.");
             }
         })
         .catch(error => {
             console.error("Erro ao enviar o formulário:", error);
-            alert("Ocorreu um erro ao enviar o formulário. Tente novamente.");
+            alert("Erreur d'envoi du formulaire. Veuillez réessayer.");
         })
         .finally(() => {
             isSubmitting = false; // 🔴 Libera para novo envio após resposta do servidor
             submitBtn.disabled = false; // Reativa o botão após a resposta do servidor
-            submitBtn.textContent = "I Want To Be A Pilot";
+            submitBtn.textContent = "Je veux être pilote";
         });
     }, { once: true }); // 🔴 O evento `submit` agora só pode ser registrado UMA VEZ
 });

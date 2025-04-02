@@ -102,7 +102,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Evita envios duplicados desativando o botão temporariamente
         submitBtn.disabled = true;
-        submitBtn.textContent = "Enviando...";
+        submitBtn.textContent = "Envoi...";
 
         const formData = new FormData(form);
 
