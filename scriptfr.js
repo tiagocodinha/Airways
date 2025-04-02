@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (!isValid || fullPhoneNumber.includes("undefined")) {
             phoneError.style.display = "block";
             phoneInput.classList.add("is-invalid");
-            phoneInput.setCustomValidity("Número inválido");
+            phoneInput.setCustomValidity("Numéro invariable");
             return false;
         } else {
             phoneError.style.display = "none";
