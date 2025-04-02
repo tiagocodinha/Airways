@@ -125,7 +125,7 @@ document.addEventListener("DOMContentLoaded", function () {
         .finally(() => {
             isSubmitting = false; // 🔴 Libera para novo envio após resposta do servidor
             submitBtn.disabled = false; // Reativa o botão após a resposta do servidor
-            submitBtn.textContent = "Je veux être pilote";
+            submitBtn.textContent = "Je veux être pilote (I want to be a pilot)";
         });
     }, { once: true }); // 🔴 O evento `submit` agora só pode ser registrado UMA VEZ
 });
