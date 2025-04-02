@@ -293,11 +293,11 @@
 
                     <div class="row g-3">
                         <div class="col-md-6">
-                            <label for="firstName" class="form-label">First Name*</label>
+                            <label for="firstName" class="form-label">Prénom (First Name)*</label>
                             <input type="text" class="form-control" id="firstName" name="firstName" required>
                         </div>
                         <div class="col-md-6">
-                            <label for="lastName" class="form-label">Last Name*</label>
+                            <label for="lastName" class="form-label">Nom de Famille (Last Name)*</label>
                             <input type="text" class="form-control" id="lastName" name="lastName" required>
                         </div>
                         <div class="col-12">
@@ -305,33 +305,33 @@
                             <input type="email" class="form-control" id="email" name="email" required>
                         </div>
                         <div class="col-12">
-                            <label for="phone" class="form-label">Phone Number*</label>                              
+                            <label for="phone" class="form-label">Numéro de téléphone (Phone Number)*</label>                              
                             <input type="tel" class="form-control" id="phone" name="phone" required>
-                            <small id="phoneError" class="text-danger" style="display: none;">Invalid phone number</small>
+                            <small id="phoneError" class="text-danger" style="display: none;">Numéro de téléphone invalide</small>
                         </div>
                         <div class="col-12">
-                            <label for="course" class="form-label">Course*</label>
+                            <label for="course" class="form-label">Cours (Course)*</label>
                             <select class="form-select" id="course" name="course" required>
-                                <option value="">Select a course</option>
+                                <option value="">Sélectionner un cours</option>
                                 <option value="atpl">Integrated ATPL Course</option>
                                 <option value="instructor">Flight Instructor Course</option>
                                 <option value="revalidation">License Revalidation</option>
                             </select>
                         </div>
                         <div class="col-12">
-                            <label class="form-label">Are you interested in joining our open day?*</label>
+                            <label class="form-label">Vous souhaitez participer à notre journée portes ouvertes?*</label>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="openDay" id="openDayYes" value="yes" required>
-                                <label class="form-check-label" for="openDayYes">Yes</label>
+                                <label class="form-check-label" for="openDayYes">Oui</label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="openDay" id="openDayNo" value="no" required>
-                                <label class="form-check-label" for="openDayNo">No</label>
+                                <label class="form-check-label" for="openDayNo">Non</label>
                             </div>
                         </div>
                     </div>
                     <div class="mt-4">
-                        <button type="submit" class="btn submit-btn w-100 py-3">I Want To Be A Pilot</button>
+                        <button type="submit" class="btn submit-btn w-100 py-3">Je veux être pilote</button>
                         <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
                     </div>
                 </form>
