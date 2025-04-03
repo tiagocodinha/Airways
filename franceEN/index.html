@@ -289,7 +289,7 @@
     <section class="form-section">
         <div class="container">
             <div class="form-container">
-                <form id="leadForm" class="needs-validation" action="https://script.google.com/macros/s/AKfycbwl_KA60PQt0PqCocxwBJcSRwl_OXolj0YaI7b9tH0_fe_RwZf0yqeceRvYdm30TOAltw/exec" method="post">
+                <form id="leadForm" class="needs-validation" action="https://script.google.com/macros/s/AKfycbxQ-GAZzS_bGdFD8NNAeyKXygJOxjn9JkSK_EhTDmRWPr3Jtwlu403rqfMiGxvPTme12g/exec" method="post">
 
                     <div class="row g-3">
                         <div class="col-md-6">
@@ -331,8 +331,9 @@
                         </div>
                     </div>
                     <div class="mt-4">
-                        <button type="submit" class="btn submit-btn w-100 py-3">I want to be a pilot</button>
+                        <input type="hidden" name="sourceURL" id="sourceURL">~
                         <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
+                        <button type="submit" class="btn submit-btn w-100 py-3">I want to be a pilot</button>
                     </div>
                 </form>
             </div>
@@ -371,6 +372,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
     <script src="/scripten.js"></script>
-
+    <script>
+        document.getElementById('sourceURL').value = window.location.href;
+      </script>
 </body>
 </html>
