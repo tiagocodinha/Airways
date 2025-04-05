@@ -281,8 +281,8 @@
 
     <section class="hero">
         <div class="hero-content">
-            <h1>Prêt à voler avec nous?</h1>
-            <p>Commencez votre carrière dans l'aviation avec la plus grande flotte d'Europe.</p>
+            <h1>Ready to fly with us?</h1>
+            <p>Start your aviation career with the largest fleet in Europe.</p>
         </div>
     </section>
 
@@ -293,11 +293,11 @@
 
                     <div class="row g-3">
                         <div class="col-md-6">
-                            <label for="firstName" class="form-label">Prénom*</label>
+                            <label for="firstName" class="form-label">First Name*</label>
                             <input type="text" class="form-control" id="firstName" name="firstName" required>
                         </div>
                         <div class="col-md-6">
-                            <label for="lastName" class="form-label">Nom*</label>
+                            <label for="lastName" class="form-label">Last Name*</label>
                             <input type="text" class="form-control" id="lastName" name="lastName" required>
                         </div>
                         <div class="col-12">
@@ -305,15 +305,35 @@
                             <input type="email" class="form-control" id="email" name="email" required>
                         </div>
                         <div class="col-12">
-                            <label for="phone" class="form-label">Numéro de téléphone*</label>                              
+                            <label for="phone" class="form-label">Phone Number*</label>                              
                             <input type="tel" class="form-control" id="phone" name="phone" required>
-                            <small id="phoneError" class="text-danger" style="display: none;">Numéro de téléphone invalide</small>
+                            <small id="phoneError" class="text-danger" style="display: none;">Invalid phone number</small>
+                        </div>
+                        <div class="col-12">
+                            <label for="course" class="form-label">Course*</label>
+                            <select class="form-select" id="course" name="course" required>
+                                <option value="">Select a course</option>
+                                <option value="atpl">Integrated ATPL Course</option>
+                                <option value="instructor">Flight Instructor Course</option>
+                                <option value="revalidation">License Revalidation</option>
+                            </select>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Are you interested in joining our open day?*</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="openDay" id="openDayYes" value="yes" required>
+                                <label class="form-check-label" for="openDayYes">Yes</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="openDay" id="openDayNo" value="no" required>
+                                <label class="form-check-label" for="openDayNo">No</label>
+                            </div>
                         </div>
                     </div>
                     <div class="mt-4">
                         <input type="hidden" name="sourceURL" id="sourceURL">
                         <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
-                        <button type="submit" class="btn submit-btn w-100 py-3">Je veux être pilote</button>
+                        <button type="submit" class="btn submit-btn w-100 py-3">I want to be a pilot</button>
                     </div>
                 </form>
             </div>
@@ -351,7 +371,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
-    <script src="/scriptfr.js"></script>
+    <script src="/scripten.js"></script>
     <script>
         document.getElementById('sourceURL').value = window.location.href;
       </script>
