@@ -1,193 +1,207 @@
+<!-- Código atualizado com informações completas e estilo institucional -->
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Succès!</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #ff0000;
-            --dark: #1a1a1a;
-            --light: #ffffff;
-            --header-height: 80px;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inscription Confirmée</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #ff0000;
+      --dark: #1a1a1a;
+      --light: #ffffff;
+      --header-height: 80px;
+    }
+    body {
+      line-height: 1.6;
+      padding-top: var(--header-height);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .header {
+      background-color: var(--light);
+      height: var(--header-height);
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 2rem;
+      transition: background-color 0.6s ease, justify-content 0.6s ease;
+    }
+    .header.scrolled {
+      background-color: rgba(26, 26, 26, 0.95);
+    }
+    .logo {
+      max-height: 28px;
+      width: auto;
+      opacity: 0;
+      animation: fadeIn 1s ease forwards;
+    }
+    .success-section {
+      flex: 1;
+      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+                 url('https://images.unsplash.com/photo-1464037866556-6812c9d1c72e?auto=format&fit=crop&w=2048&q=80');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 1rem;
+      color: var(--light);
+      text-align: left;
+    }
+    .success-content {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(12px);
+      padding: 3rem;
+      border-radius: 20px;
+      max-width: 960px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: slideUp 1s ease forwards;
+    }
+    .section-title {
+      font-size: 1.4rem;
+      font-weight: bold;
+      margin-top: 2rem;
+    }
+    .success-icon {
+      width: 80px;
+      height: 80px;
+      background-color: var(--primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 2rem;
+    }
+    .success-icon svg {
+      width: 40px;
+      height: 40px;
+      stroke: white;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .home-btn {
+      background-color: var(--primary);
+      color: var(--light);
+      padding: 1rem 2rem;
+      border-radius: 30px;
+      text-decoration: none;
+      margin-top: 2rem;
+      display: inline-block;
+      transition: 0.3s ease;
+    }
+    .home-btn:hover {
+      background-color: #cc0000;
+      transform: translateY(-2px);
+    }
+    ul {
+      padding-left: 1.2rem;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @media (max-width: 768px) {
+      :root { --header-height: 60px; }
+      .logo { max-height: 15px; }
+      .success-content { padding: 2rem; }
+    }
+  </style>
+</head>
 
-        body {
-            line-height: 1.6;
-            padding-top: var(--header-height);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
 
-        .header {
-            background-color: var(--light);
-            height: var(--header-height);
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 100;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0 2rem;
-            transition: background-color 0.6s ease, justify-content 0.6s ease;
-        }
+<!-- Facebook Pixel Code --><script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js'); fbq('init', '682261024257213'); fbq('track', 'PageView');</script><noscript> <img height="1" width="1" src="https://www.facebook.com/tr?id=682261024257213&ev=PageView&noscript=1"/></noscript><!-- End Facebook Pixel Code -->
 
-        .header.scrolled {
-            background-color: rgba(26, 26, 26, 0.95);
-            justify-content: center;
-        }
-
-        .logo {
-            max-height: 28px;
-            width: auto;
-            opacity: 0;
-            animation: fadeIn 1s ease forwards;
-            transition: transform 0.3s ease;
-        }
-
-        .success-section {
-            flex: 1;
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-                       url('https://images.unsplash.com/photo-1464037866556-6812c9d1c72e?auto=format&fit=crop&w=2048&q=80');
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-            color: var(--light);
-            text-align: center;
-        }
-
-        .success-content {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            padding: 3rem;
-            border-radius: 20px;
-            max-width: 600px;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: slideUp 1s ease forwards;
-        }
-
-        .success-icon {
-            width: 80px;
-            height: 80px;
-            background-color: var(--primary);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 2rem;
-        }
-
-        .success-icon svg {
-            width: 40px;
-            height: 40px;
-            fill: none;
-            stroke: white;
-            stroke-width: 2;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-        }
-
-        .home-btn {
-            background-color: var(--primary);
-            color: var(--light);
-            padding: 1rem 2rem;
-            border-radius: 30px;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            display: inline-block;
-            margin-top: 2rem;
-        }
-
-        .home-btn:hover {
-            background-color: #cc0000;
-            color: var(--light);
-            transform: translateY(-2px);
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @media (max-width: 768px) {
-            :root {
-                --header-height: 60px;
-            }
-
-            .header {
-                padding: 0 1rem;
-            }
-
-            .success-content {
-                padding: 2rem;
-            }
-
-            .logo {
-                max-height: 15px;
-            }
-        }
-    </style>
 <body>
-    <header class="header">
-        <img src="images/logofrance.svg" alt="Airways Aviation Logo" class="logo">
-    </header>
+<header class="header">
+  <img src="images/logofrance.svg" alt="Airways Aviation Logo" class="logo">
+</header>
+<section class="success-section">
+  <div class="success-content">
+    <div class="success-icon">
+      <svg viewBox="0 0 24 24">
+        <polyline points="20 6 9 17 4 12"></polyline>
+      </svg>
+    </div>
+    <h1 class="display-5 mb-4">Merci pour votre inscription !</h1>
+    <p class="mb-4">Voici toutes les informations dont vous avez besoin pour commencer votre carrière de pilote chez Airways Aviation:</p>
 
-    <section class="success-section">
-        <div class="success-content">
-            <div class="success-icon">
-                <svg viewBox="0 0 24 24">
-                    <polyline points="20 6 9 17 4 12"></polyline>
-                </svg>
-            </div>
-            <h1 class="display-4 mb-4">Inscription terminée!</h1>
-            <p class="lead mb-4">Nous vous remercions d'avoir choisi l'Airways Aviation Academy. Notre équipe vous contactera sous peu pour discuter des prochaines étapes de votre parcours pour devenir pilote professionnel.</p>
-            <p class="mb-4">Surveillez votre courrier électronique et votre téléphone pour obtenir plus d'informations sur la formation de votre choix.</p>
-            <a href="https://www.airwaysaviation.com" class="home-btn">Page d'accueil</a>
-        </div>
-    </section>
+    <div class="section-title">Formations proposées</div>
+    <p><strong>Intégrée :</strong> 18–36 mois | 762h de théorie + 219h30 de vol | 103 500 € (paiement échelonné)<br>
+       <strong>Double Qualification :</strong> Intégrée + Bachelor (MBS) pour 13 000 € supplémentaires<br>
+       <strong>Modulaire :</strong> Pour titulaires PPL(A), modules ou packs de 38 000 € à 42 000 €</p>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Header scroll effect with throttling
-        let lastScrollPosition = window.scrollY;
-        let ticking = false;
+    <div class="section-title">Prérequis</div>
+    <ul>
+      <li>17 ans minimum (18 ans au moment du CPL)</li>
+      <li>Baccalauréat (obligatoire pour Bachelor)</li>
+      <li>Niveau d’anglais suffisant</li>
+      <li>Certificat médical EASA Classe 1</li>
+      <li>Réussite des tests ADAPT</li>
+    </ul>
 
-        window.addEventListener('scroll', () => {
-            if (!ticking) {
-                window.requestAnimationFrame(() => {
-                    const currentScroll = window.scrollY;
-                    const header = document.querySelector('.header');
-                    
-                    if (currentScroll > 50) {
-                        header.classList.add('scrolled');
-                    } else {
-                        header.classList.remove('scrolled');
-                    }
-                    
-                    lastScrollPosition = currentScroll;
-                    ticking = false;
-                });
-                ticking = true;
-            }
-        });
-    </script>
+    <div class="section-title">Hébergement</div>
+    <p>Aérocampus à côté de l’école<br>
+    Autres logements<br> <a href="https://www.esma.fr/les-logements" class="text-white">Découvrir</a></p>
+
+    <div class="section-title">Financement (France)</div>
+    <ul>
+      <li><strong>Crédit Agricole</strong> – Mme Morand | emmanuelle.morand@ca-languedoc.fr</li>
+      <li><strong>Société Générale</strong> – Mme Toubas / Mme Kobril</li>
+      <li><strong>Banque Populaire</strong> – Mme Jeanniot</li>
+      <li><strong>CIC</strong> – M. Howard</li>
+    </ul>
+
+    <div class="section-title">Étapes à suivre</div>
+    <ol>
+      <li>Lire attentivement les informations reçues</li>
+      <li>Compléter le formulaire de candidature + pièce d'identité</li>
+      <li>Réserver la visite médicale</li>
+      <li>Participer aux tests ADAPT</li>
+      <li>Choisir une date de rentrée ou participer à une LODAP</li>
+    </ol>
+
+    <div class="section-title">Dates importantes</div>
+    <p><strong>Rentrées ATPL Intégrée :</strong> 22 mai, 04 septembre, 13 novembre 2025<br>
+    <strong>Journées LODAP :</strong> 25/04, 27/06, 01/08, 24/10, 19/12</p>
+
+    <div class="section-title">Contact</div>
+    <p>Isabelle Lopez – Responsable Admissions<br>
+    📞 +33 (0)6 26 36 44 04<br>
+    ✉️ i.lopez@airwaysaviation.com</p>
+
+    <a href="https://www.airwaysaviation.com" class="home-btn">Retour au site</a>
+  </div>
+</section>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  let lastScrollPosition = window.scrollY;
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        const header = document.querySelector('.header');
+        if (window.scrollY > 50) header.classList.add('scrolled');
+        else header.classList.remove('scrolled');
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+</script>
+</body>
 </html>
