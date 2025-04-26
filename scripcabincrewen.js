@@ -44,8 +44,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const phoneInput = document.getElementById("phone");
     const phoneError = document.getElementById("phoneError");
     const submitBtn = form.querySelector("button[type='submit']");
-    let isSubmitting = false;
+    let isSubmitting = false; // 🔴 Flag para impedir envios duplicados
 
+    // Configuração do intl-tel-input
     var iti = window.intlTelInput(phoneInput, {
         initialCountry: "fr",
         preferredCountries: ["fr", "pt", "es", "br"],
@@ -53,6 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
         utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"
     });
 
+    // Função para validar e corrigir número de telefone
     function validatePhoneNumber() {
         var fullPhoneNumber = iti.getNumber();
         var isValid = iti.isValidNumber();
@@ -70,79 +72,63 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    // 🔴 Remover qualquer evento duplicado antes de adicionar um novo
     form.addEventListener("submit", function (event) {
-        event.preventDefault();
+        event.preventDefault(); // Impede envio padrão
 
-        if (isSubmitting) return;
-        isSubmitting = true;
+        // 🔴 Evita envios duplicados
+        if (isSubmitting) {
+            console.log("Envio bloqueado para evitar duplicação.");
+            return;
+        }
+        isSubmitting = true; // 🔴 Define a flag para evitar envios duplicados
 
         var fullPhoneNumber = validatePhoneNumber();
         if (!fullPhoneNumber) {
-            isSubmitting = false;
+            isSubmitting = false; // 🔴 Libera para novo envio se o número for inválido
             return;
         }
 
         if (!form.checkValidity()) {
             form.reportValidity();
-            isSubmitting = false;
+            isSubmitting = false; // 🔴 Libera para novo envio se houver erro no formulário
             return;
         }
 
+        // Atualiza o valor do campo telefone com o número formatado corretamente
         phoneInput.value = fullPhoneNumber;
 
+        console.log("Número enviado:", fullPhoneNumber); // Debug
+
+        // Evita envios duplicados desativando o botão temporariamente
         submitBtn.disabled = true;
         submitBtn.textContent = "Sending...";
 
-        grecaptcha.ready(function() {
-            grecaptcha.execute('6LdrdO8qAAAAAAmgcczCLR_rhm1a2_Z-zLUFAOvc', {action: 'submit'})
-            .then(function(token) {
-                document.getElementById('recaptchaResponse').value = token;
+        const formData = new FormData(form);
 
-                const formData = new FormData(form);
-
-                fetch("https://validar-recaptcha.geral-284.workers.dev/", {
-                    method: "POST",
-                    body: JSON.stringify({ recaptcha_response: formData.get("recaptcha_response") }),
-                    headers: { "Content-Type": "application/json" }
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        // Se recaptcha OK, agora envia para o teu Google Script
-                        fetch(form.action, {
-                            method: form.method,
-                            body: formData
-                        })
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data.status === "success") {
-                                window.location.href = "/sucessoen.html";
-                            } else {
-                                alert("Error sending the form. Please try again.");
-                            }
-                        })
-                        .catch(error => {
-                            console.error("Erro ao enviar o formulário:", error);
-                            alert("There was an error sending the form. Please try again.");
-                        });
-                    } else {
-                        alert("Erro na verificação do reCAPTCHA.");
-                    }
-                })
-                .catch(error => {
-                    console.error("Erro ao validar reCAPTCHA:", error);
-                    alert("Erro ao validar reCAPTCHA.");
-                })
-                .finally(() => {
-                    isSubmitting = false;
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = "I want to be a cabin crew";
-                });
-            });
+        fetch(form.action, {
+            method: form.method,
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === "success") {
+                window.location.href = "/sucessoen.html";
+            } else {
+                alert("Error sending the form. Please try again.");
+            }
+        })
+        .catch(error => {
+            console.error("Erro ao enviar o formulário:", error);
+            alert("There was an error sending the form. Please try again.");
+        })
+        .finally(() => {
+            isSubmitting = false; // 🔴 Libera para novo envio após resposta do servidor
+            submitBtn.disabled = false; // Reativa o botão após a resposta do servidor
+            submitBtn.textContent = "I want to be a cabin crew";
         });
-    });
+    }, { once: true }); // 🔴 O evento `submit` agora só pode ser registrado UMA VEZ
 });
-
 
 
 
